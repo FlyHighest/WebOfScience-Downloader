@@ -51,13 +51,13 @@ class DownloadThread(QtCore.QThread):
         b=browser.find_element_by_id('select2-bib_fields-container')
         b.click()
 
-        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(3)')
+        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(1)')
         ul.click()
 
         b=browser.find_element_by_id('select2-saveOptions-container')
         b.click()
 
-        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(8)')
+        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(7)')
         ul.click()
 
         button=browser.find_element_by_css_selector('div.quickoutput-overlay-buttonset span.quickoutput-action button.primary-button')
