@@ -30,28 +30,31 @@ class DownloadThread(QtCore.QThread):
     def download_once(self,browser,start,end,first):
 
         #选中第5个下载选项
-        if(first==True):
-            elems = browser.find_elements_by_css_selector('span.select2-selection__arrow')  # Find the search box
-            elems[1].click()
-            elem=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(5)')
-            elem.click()
-        else:
-            elem=browser.find_element_by_id('select2-saveToMenu-container')
-            elem.click()
+        if(True):
+            elems = browser.find_elements_by_id('exportMoreOptions')  # Find the list button
 
+            elems[0].click()
+            
+            elem=browser.find_element_by_id('saveToMenu')
+            elem=elem.find_element_by_css_selector('li:nth-child(3)')
+            elem.click()
+        
 
         elem=browser.find_element_by_id('numberOfRecordsRange')
         elem.click()
 
         markfrom=browser.find_element_by_id('markFrom')
+        
+        markfrom.clear()
         markfrom.send_keys(str(start))
         markto=browser.find_element_by_id('markTo')
+        markto.clear()
         markto.send_keys(str(end))
 
         b=browser.find_element_by_id('select2-bib_fields-container')
         b.click()
 
-        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(1)')
+        ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(3)')
         ul.click()
 
         b=browser.find_element_by_id('select2-saveOptions-container')
@@ -60,7 +63,7 @@ class DownloadThread(QtCore.QThread):
         ul=browser.find_element_by_css_selector('ul.select2-results__options li:nth-child(7)')
         ul.click()
 
-        button=browser.find_element_by_css_selector('div.quickoutput-overlay-buttonset span.quickoutput-action button.primary-button')
+        button=browser.find_element_by_id('exportButton')
         button.click()
         
         WebDriverWait(browser, 20, 0.5).until(EC.presence_of_element_located((By.CSS_SELECTOR,'form.quick-output-form div.quickoutput-overlay-buttonset a.quickoutput-cancel-action')))
