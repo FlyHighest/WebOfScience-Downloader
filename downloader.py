@@ -30,14 +30,16 @@ class DownloadThread(QtCore.QThread):
     def download_once(self,browser,start,end,first):
 
         #选中第5个下载选项
-        if(True):
-            elems = browser.find_elements_by_id('exportMoreOptions')  # Find the list button
-
-            elems[0].click()
+        try:
+            elems = browser.find_element_by_id('exportMoreOptions')  # Find the list button
+            elems.click()
+        except Exception as e:
+            elems = browser.find_element_by_id('exportTypeName')  # Find the list button
+            elems.click()
             
-            elem=browser.find_element_by_id('saveToMenu')
-            elem=elem.find_element_by_css_selector('li:nth-child(3)')
-            elem.click()
+        elem=browser.find_element_by_id('saveToMenu')
+        elem=elem.find_element_by_css_selector('li:nth-child(3)')
+        elem.click()
         
 
         elem=browser.find_element_by_id('numberOfRecordsRange')
